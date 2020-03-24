@@ -58,7 +58,7 @@ function operate(wholeArr) {
 // DONE: return result when '=' is pressed
 // DONE: change 'sum' to '+' and for other operators
 // DONE: display calc without commas
-// TODO: support for multiple digit numbers
+// DONE: support for multiple digit numbers
 // TODO: make result the first and only item in array when equals is pressed
 
 
@@ -74,7 +74,9 @@ let numpadButtons = document.querySelectorAll('.numpad button');
 numpadButtons.forEach((button) => 
     button.addEventListener('click', () => {
         stagingArr.push(parseInt(button.textContent));
-        changeDisplayText(stagingArr.join(''));
+        changeDisplayText(displayArr.concat(stagingArr));
+        console.log('staging: [' + stagingArr + ']  ||' + '  display: [' + displayArr + ']');
+        console.log();
     })
 );
 
@@ -84,9 +86,11 @@ operatorButtons.forEach((button) =>
 
         if (stagingArr == 0) {
             // alert('staging area is empty')
+
         } else {
             // alert('pushing staged to display')
             displayArr.push(parseInt(stagingArr.join('').toString()));
+
         } 
         stagingArr = [];
         displayArr.push(button.textContent);
