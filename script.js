@@ -25,28 +25,28 @@ function operate(wholeArr) {
         numAfter = numArr[1];
 
         switch (operatorCurrent) {
-            case 'add':
+            case '+':
                 result = add(numCurrent, numAfter);
                 numArr.splice(0, 2, result);
                 break;
 
-            case 'subtract':
+            case '-':
                 result = subtract(numCurrent, numAfter);
                 numArr.splice(0, 2, result);
                 break;
 
-            case 'multiply':
+            case '*':
                 result = multiply(numCurrent, numAfter);
                 numArr.splice(0, 2, result);
                 break;
 
-            case 'divide':
+            case '÷':
                 result = divide(numCurrent, numAfter);
                 numArr.splice(0, 2, result);
                 break;
                 
             default:
-                console.log('default')
+                console.log('Enter number')
                 break;
         }    
     }
@@ -54,28 +54,29 @@ function operate(wholeArr) {
 }
 
 // DOM Manipulation
+
+// DONE: return result when '=' is pressed
+// DONE: change 'sum' to '+' and for other operators
+// DONE: display calc without commas
 // TODO: support for multiple digit numbers
-// TODO: display calc without commas
-// TODO: return result when '=' is pressed
 
 let displayArr = [];
-let result;
 
 let numpadButtons = document.querySelectorAll('.numpad button');
 numpadButtons.forEach((button) => 
     button.addEventListener('click', () => {
         displayArr.push(parseInt(button.textContent));
-        changeDisplayText(displayArr);
-    }
-    ));
+        changeDisplayText(displayArr.join(' '));
+    })
+);
 
 let operatorButtons = document.querySelectorAll('.operator button');
 operatorButtons.forEach((button) => 
     button.addEventListener('click', () => {
-        displayArr.push(button.id);
-        changeDisplayText(displayArr);
-    }
-    ));
+        displayArr.push(button.textContent);
+        changeDisplayText(displayArr.join(' '));
+    })
+);
 
 function changeDisplayText(displayText) {
     let display = document.querySelector('.display');
@@ -84,6 +85,12 @@ function changeDisplayText(displayText) {
 
 let equals = document.querySelector('#equals');
 equals.addEventListener('click', () => changeDisplayText(operate(displayArr)));
+
+let clear = document.querySelector('#clear');
+clear.addEventListener('click', () => {
+    displayArr = [];
+    changeDisplayText('0');
+})
 
 // let testArr = [3, 'divide', 5, 'subtract', 10 , 'add', 2, 'multiply', 7]
 
