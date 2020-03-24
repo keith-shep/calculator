@@ -59,7 +59,7 @@ function operate(wholeArr) {
 // DONE: change 'sum' to '+' and for other operators
 // DONE: display calc without commas
 // DONE: support for multiple digit numbers
-// TODO: make result the first and only item in array when equals is pressed
+// DONE: make result the first and only item in array when equals is pressed
 
 
 let stagingArr = [];
@@ -74,9 +74,7 @@ let numpadButtons = document.querySelectorAll('.numpad button');
 numpadButtons.forEach((button) => 
     button.addEventListener('click', () => {
         stagingArr.push(parseInt(button.textContent));
-        changeDisplayText(displayArr.concat(stagingArr));
-        console.log('staging: [' + stagingArr + ']  ||' + '  display: [' + displayArr + ']');
-        console.log();
+        changeDisplayText((displayArr.concat(stagingArr)).join(''));
     })
 );
 
@@ -85,29 +83,28 @@ operatorButtons.forEach((button) =>
     button.addEventListener('click', () => {
 
         if (stagingArr == 0) {
-            // alert('staging area is empty')
-
+            // console.log('staging area is empty')
         } else {
-            // alert('pushing staged to display')
             displayArr.push(parseInt(stagingArr.join('').toString()));
-
         } 
         stagingArr = [];
         displayArr.push(button.textContent);
-        changeDisplayText(displayArr.join(' '));
+        changeDisplayText(displayArr.join(''));
     })
 );
 
 let equals = document.querySelector('#equals');
 equals.addEventListener('click', () => {
     if (stagingArr == 0) {
-        // alert('staging area is empty')
+        // console.log('staging area is empty')
     } else {
-        // alert('pushing staged to display')
         displayArr.push(parseInt(stagingArr.join('').toString()));
     } 
+    let endValue = operate(displayArr);
     stagingArr = [];
-    changeDisplayText(operate(displayArr))
+    displayArr = [];
+    displayArr.push(endValue);
+    changeDisplayText(displayArr);
 });
 
 let clear = document.querySelector('#clear');
