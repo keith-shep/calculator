@@ -63,7 +63,6 @@ function operate(wholeArr) {
 // DONE: returns NAN when 0 is added, subtracted etc
 // ISSUE: floats overflow display screen
 
-
 let stagingArr = [];
 let displayArr = [];
 
