@@ -60,6 +60,8 @@ function operate(wholeArr) {
 // DONE: display calc without commas
 // DONE: support for multiple digit numbers
 // DONE: make result the first and only item in array when equals is pressed
+// DONE: returns NAN when 0 is added, subtracted etc
+// ISSUE: floats overflow display screen
 
 
 let stagingArr = [];
@@ -95,7 +97,7 @@ operatorButtons.forEach((button) =>
 
 let equals = document.querySelector('#equals');
 equals.addEventListener('click', () => {
-    if (stagingArr == 0) {
+    if (stagingArr == undefined) {
         // console.log('staging area is empty')
     } else {
         displayArr.push(parseInt(stagingArr.join('').toString()));
